@@ -17,6 +17,7 @@ const joke = {
   joke_5: "How does the solor system organize a party? They planet!",
 };
 
+//Main page of the joke app
 const mainPageDesign = `<html>
     <head>
       <title>Hello you!</title>
@@ -32,15 +33,22 @@ const mainPageURL = (request, response) => {
 
 app.get("/jokes", mainPageURL);
 
-app.get("/jokes/:age", (request, response) => {
-  const age = parseInt(request.params.age);
+//Other pages of the joke app
+const otherPagesURL = (request, response) => {
+  response.send("Test other pages");
+};
 
-  console.log("Request...");
-  //If age is <= 30 then tell joke 1
-  //If age is > 30 then tell joke 2
-  if (age <= 30) {
-    response.send(joke.joke_1);
-  } else {
-    response.send(joke.joke_3);
-  }
-});
+app.get("/jokes/:age", otherPagesURL);
+
+// app.get("/jokes/:age", (request, response) => {
+//   const age = parseInt(request.params.age);
+
+//   console.log("Request...");
+//   //If age is <= 30 then tell joke 1
+//   //If age is > 30 then tell joke 2
+//   if (age <= 30) {
+//     response.send(joke.joke_1);
+//   } else {
+//     response.send(joke.joke_3);
+//   }
+// });
