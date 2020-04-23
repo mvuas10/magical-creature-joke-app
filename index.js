@@ -17,6 +17,21 @@ const joke = {
   joke_5: "How does the solor system organize a party? They planet!",
 };
 
+const mainPageDesign = `<html>
+    <head>
+      <title>Hello you!</title>
+    </head>
+    <body>
+      <h1>Welcome to my joke app!</h1>
+    </body>
+  </html>`;
+
+const mainPageURL = (request, response) => {
+  response.send(mainPageDesign);
+};
+
+app.get("/jokes", mainPageURL);
+
 app.get("/jokes/:age", (request, response) => {
   const age = parseInt(request.params.age);
 
@@ -26,6 +41,6 @@ app.get("/jokes/:age", (request, response) => {
   if (age <= 30) {
     response.send(joke.joke_1);
   } else {
-    response.send("Dude you are old");
+    response.send(joke.joke_3);
   }
 });
