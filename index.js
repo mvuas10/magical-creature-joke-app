@@ -8,6 +8,7 @@ app.listen(port, () => {
   console.log(`Listening on: ${port}`);
 });
 
-app.get("/jokes", () => {
+app.get("/jokes", (request, response) => {
   console.log("Request...");
+  response.send("Hello World!");
 });
