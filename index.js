@@ -82,7 +82,7 @@ app.get("/", (request, response) => {
       </head>
       <body>
         <h1>Are you a magical creature yourself, click one of the buttons below to LOL on a magical creatures joke!</h1>
-        <h2>Click one of the below👇</h1>
+        <h2>Click one of the below 👇 for a LOL time</h1>
         
         <form>
         <div class="container">
