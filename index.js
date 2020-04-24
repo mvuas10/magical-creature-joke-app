@@ -1,23 +1,24 @@
-const joke = {
-  joke_1: {
-    setup: "What do you call a boommeran that doesn't work?",
-    punchline: "A stick",
+const jokes = {
+  unicorn_joke: {
+    setup: "Whats the difference between an honest politician and a unicorn?",
+    punchline: "Nothing, they're both fictional characters.",
   },
-  joke_2: {
-    setup: "The same bike tries to run me down every day.",
-    punchline: "Sounds like a vicious cycle",
+  gollum_joke: {
+    setup: "Why was Gollum executed at a bar in Iraq?",
+    punchline: "Because he asked for Ice-es",
   },
-  joke_3: {
-    setup: "What do you call a guy who's had too much to drink?",
-    punchline: "A cab",
+  cyclop_joke: {
+    setup: "What did the cyclops sailor say to his captain?",
+    punchline: "Eye captain",
   },
-  joke_4: {
-    setup: "What kinds of tree has a hand?",
-    punchline: "A palm tree",
+  mermaid_joke: {
+    setup: "Where did the fisherman and mermaid meet?",
+    punchline: "On line!",
   },
-  joke_5: {
-    setup: "How does the solor system organize a party?",
-    punchline: "They planet!",
+  phoenix_joke: {
+    setup:
+      "What award did Joaquin Phoenix win for his weight loss transformation into Arthur Fleck in Joker?",
+    punchline: "Atrophy",
   },
 };
 
@@ -31,84 +32,95 @@ app.listen(port, () => {
   console.log(`Listening on: ${port}`);
 });
 
-app.get("/jokes/:name/:age/:pinapplePizza", otherPagesURL);
+app.get("/:age/:magicalCreature", otherPagesURL);
 
-//Main page of the joke app
-const mainPageDesign = `<html>
-    <head>
-      <title>Hello you</title>
-    </head>
-    <body>
-      <h1>Welcome to my joke app!</h1>
-      <p>Paste your answer at the end of the URL</>
-      <p>/Name/Age/"Yes" if you like pinapple on pizza and "No" if you don't like pinapple on pizza</p>
-    </body>
-  </html>`;
-
-const mainPageURL = (request, response) => {
-  response.send(mainPageDesign);
-};
-
-app.get("/jokes", mainPageURL);
-
-//Other pages of the joke app
 const otherPagesURL = (request, response) => {
-  const name = request.params.name;
-  const age = parseInt(request.params.age);
-  const pinapplePizza = request.params.pinapplePizza;
+  const { age, magicalCreature } = request.params;
 
-  //Pinapple on age, pizza or not
-  console.log("Request...");
-  if (age <= 30 && pinapplePizza === "yes") {
-    response.send(page);
-  } else if (age <= 30 && pinapplePizza === "no") {
-    response.send(jokeTwoPageDesign);
-  } else if (age > 30 && pinapplePizza === "yes") {
-    response.send(jokeThreePageDesign);
-  } else if (age > 30 && pinapplePizza === "no") {
-    response.send(jokeFourPageDesign);
-  }
+  let joke;
 
-  const page = render(joke);
+  if (magicalCreature === "unicorn") {
+    joke = age <= 30 ? jokes.unicorn_joke : jokes.joke_2;
+  } else if (magicalCreature === "") console.log(request.params.age);
+  console.log(request.params.magicalCreature);
+  response.send("hello world");
 };
 
-function render(joke) {
-  const jokeOnePageDesign = `<html>
-    <head>
-      <title>Hello you with age</title>
-    </head>
-    <body>
-      <h1>${joke.joke_1}</h1>
-      <img src="${img}"/>
-    </body>
-  </html>`;
+// //Main page of the joke app
+// app.get("/jokes", mainPageURL);
+// const mainPageDesign = `<html>
+//     <head>
+//       <title>Hello you</title>
+//     </head>
+//     <body>
+//       <h1>Welcome to my joke app!</h1>
+//       <p>Paste your answer at the end of the URL</>
+//       <p>/Name/Age/"Yes" if you like pinapple on pizza and "No" if you don't like pinapple on pizza</p>
+//     </body>
+//   </html>`;
 
-  return jokeOnePageDesign;
-}
+// const mainPageURL = (request, response) => {
+//   response.send(mainPageDesign);
+// };
 
-const jokeTwoPageDesign = `<html>
-<head>
-  <title>Hello you with age</title>
-</head>
-<body>
-  <h1>${joke.joke_2}</h1>
-</body>
-</html>`;
+// //Other pages of the joke app
+// const otherPagesURL = (request, response) => {
+//   const name = request.params.name;
+//   const age = parseInt(request.params.age);
+//   const pinapplePizza = request.params.pinapplePizza;
 
-const jokeThreePageDesign = `<html>
-<head>
-  <title>Hello you with age</title>
-</head>
-<body>
-  <h1>${joke.joke_3}</h1>
-</body>
-</html>`;
+//   //Pinapple on age, pizza or not
+//   console.log("Request...");
+//   if (age <= 30 && pinapplePizza === "yes") {
+//     response.send(page);
+//   } else if (age <= 30 && pinapplePizza === "no") {
+//     response.send(jokeTwoPageDesign);
+//   } else if (age > 30 && pinapplePizza === "yes") {
+//     response.send(jokeThreePageDesign);
+//   } else if (age > 30 && pinapplePizza === "no") {
+//     response.send(jokeFourPageDesign);
+//   }
 
-const jokeFourPageDesign = `<html>
-<head>
-  <title>Hello you with age</title>
-</head>
-<body>
-  <h1>${joke.joke_4}</h1>
-</body>
-</html>`;
+//   const page = render(joke);
+// };
+
+// function render(joke) {
+//   const jokeOnePageDesign = `<html>
+//     <head>
+//       <title>Hello you with age</title>
+//     </head>
+//     <body>
+//       <h1>${joke.joke_1}</h1>
+//       <img src="${img}"/>
+//     </body>
+//   </html>`;
+
+//   return jokeOnePageDesign;
+// }
+
+// const jokeTwoPageDesign = `<html>
+// <head>
+//   <title>Hello you with age</title>
+// </head>
+// <body>
+//   <h1>${joke.joke_2}</h1>
+// </body>
+// </html>`;
+
+// const jokeThreePageDesign = `<html>
+// <head>
+//   <title>Hello you with age</title>
+// </head>
+// <body>
+//   <h1>${joke.joke_3}</h1>
+// </body>
+// </html>`;
+
+// const jokeFourPageDesign = `<html>
+// <head>
+//   <title>Hello you with age</title>
+// </head>
+// <body>
+//   <h1>${joke.joke_4}</h1>
+// </body>
+// </html>`;
