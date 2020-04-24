@@ -20,10 +20,12 @@ const joke = {
 //Main page of the joke app
 const mainPageDesign = `<html>
     <head>
-      <title>Hello you!</title>
+      <title>Hello you</title>
     </head>
     <body>
       <h1>Welcome to my joke app!</h1>
+      <p>Paste your answer at the end of the URL</>
+      <p>/Name/Age/"Yes" if you like pinapple on pizza and "No" if you don't like pinapple on pizza</p>
     </body>
   </html>`;
 
@@ -35,20 +37,57 @@ app.get("/jokes", mainPageURL);
 
 //Other pages of the joke app
 const otherPagesURL = (request, response) => {
-  response.send("Test other pages");
+  const name = request.params.name;
+  const age = parseInt(request.params.age);
+  const pinapplePizza = request.params.pinapplePizza;
+
+  //Pinapple on age, pizza or not
+  console.log("Request...");
+  if (age <= 30 && pinapplePizza === "yes") {
+    response.send(jokeOnePageDesign);
+  } else if (age <= 30 && pinapplePizza === "no") {
+    response.send(jokeTwoPageDesign);
+  } else if (age > 30 && pinapplePizza === "yes") {
+    response.send(jokeThreePageDesign);
+  } else if (age > 30 && pinapplePizza === "no") {
+    response.send(jokeFourPageDesign);
+  }
 };
 
-app.get("/jokes/:age", otherPagesURL);
+const jokeOnePageDesign = `<html>
+    <head>
+      <title>Hello you with age</title>
+    </head>
+    <body>
+      <h1>${joke.joke_1}</h1>
+    </body>
+  </html>`;
 
-// app.get("/jokes/:age", (request, response) => {
-//   const age = parseInt(request.params.age);
+const jokeTwoPageDesign = `<html>
+<head>
+  <title>Hello you with age</title>
+</head>
+<body>
+  <h1>${joke.joke_2}</h1>
+</body>
+</html>`;
 
-//   console.log("Request...");
-//   //If age is <= 30 then tell joke 1
-//   //If age is > 30 then tell joke 2
-//   if (age <= 30) {
-//     response.send(joke.joke_1);
-//   } else {
-//     response.send(joke.joke_3);
-//   }
-// });
+const jokeThreePageDesign = `<html>
+<head>
+  <title>Hello you with age</title>
+</head>
+<body>
+  <h1>${joke.joke_3}</h1>
+</body>
+</html>`;
+
+const jokeFourPageDesign = `<html>
+<head>
+  <title>Hello you with age</title>
+</head>
+<body>
+  <h1>${joke.joke_4}</h1>
+</body>
+</html>`;
+
+app.get("/jokes/:name/:age/:pinapplePizza", otherPagesURL);
