@@ -50,15 +50,7 @@ app.listen(port, onListen);
 app.get("/:age/:gender", (request, response) => {
   const { age, gender } = request.params;
 
-  let joke;
-
-  if (gender === "female") {
-    joke = age < 30 ? jokes.unicorn_joke : jokes.gollum_joke;
-  } else if (gender === "male") {
-    joke = age > 30 ? jokes.mermaid_joke : jokes.cyclop_joke;
-  } else {
-    joke = jokes.phoenix_joke;
-  }
+  let joke = selectJokeForAgeAndGender(age, gender, jokes);
 
   const page = render(joke);
   response.send(page);
@@ -69,13 +61,58 @@ function render(joke) {
   const page = `<html>
   <head>
     <title>Programing jokes</title>
+      ${makeStyle()}
   </head>
   <body>
-    <h1>${setup}</h1>
-    <h1>${punchline}</h1>
-    <img src="${img1}"/>
-    <img src="${img2}"/>
+      ${displayJokes(joke)}
   </body>
 </html>`;
   return page;
+}
+
+function makeStyle() {
+  console.log("style");
+  return `<style>
+      body {
+        padding: 5% 10%;
+      }
+
+      h1 {
+        text-align: center;
+      }
+
+      div {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      img {
+          width: 35vw;
+          padding: 7vh; 7vw;
+      } 
+    </style>`;
+}
+
+function displayJokes(joke) {
+  console.log("Display joke");
+  const { setup, punchline, img1, img2 } = joke;
+  return `
+  <h1>${setup}</h1>
+  <h1>${punchline}</h1>
+  <div>
+  <img src="${img1}"/>
+  <img src="${img2}"/>
+  </div>;
+  `;
+}
+
+function selectJokeForAgeAndGender(age, gender, jokes) {
+  if (gender === "female") {
+    return age < 30 ? jokes.unicorn_joke : jokes.mermaid_joke;
+  } else if (gender === "male") {
+    return age > 30 ? jokes.gollum_joke : jokes.cyclop_joke;
+  } else {
+    return jokes.phoenix_joke;
+  }
 }
