@@ -60,27 +60,41 @@ app.get("/", (request, response) => {
           text-align: center;
         }
 
-        a {
-          color: #000;
+        form {
+
         }
 
-        
+        button {
+          width: 17em;
+      }
+
+      .container{
+        display:flex;
+
+      }
+      
+      button{
+        width: 17em;
+        margin-left: 1em;
+      }
+
         </style>
       </head>
       <body>
-        <h1>Are you a magical creature yourself, click one of the links below to hear more magical creatures jokes!</h1>
-        <h2>Which magical creature are you?</h1>
-        <h2>How old are you?</h1>
-        <h2>What is your gender?</h1>
-
-        <h3><form><button formaction="/25/female">Mermaid</button></h3>
-        <h3><form><button formaction="/35/female">Phoenix</button></h3>
-        <h3><form><button formaction="/25/male">Cyclop</button></h3>
-        <h3><form><button formaction="/35/male">Gollum</button></h3>
-        <h3><form><button formaction="/25/female">Unicorn</button></h3>
+        <h1>Are you a magical creature yourself, click one of the buttons below to LOL on a magical creatures joke!</h1>
+        <h2>Click one of the below👇</h1>
+        
+        <form>
+        <div class="container">
+        <button formaction="/25/female">Mermaid</button>
+        <button formaction="/35/female">Phoenix</button>
+        <button formaction="/25/male">Cyclop</button>
+        <button formaction="/35/male">Gollum</button>
+        <button formaction="/25/female">Unicorn</button>
+        </div>
+        </form>
 
         <br>
-        <img src="https://cdn.shopify.com/s/files/1/0295/1977/3833/files/Unicorn-Gif_49.gif?v=1581528018" alt="Unicorn">
         <img src="https://cdn.shopify.com/s/files/1/0295/1977/3833/files/Unicorn-Gif_49.gif?v=1581528018" alt="Unicorn">
       </body>
 
