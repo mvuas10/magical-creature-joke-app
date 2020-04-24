@@ -47,6 +47,48 @@ function onListen() {
 
 app.listen(port, onListen);
 
+//Home page
+app.get("/", (request, response) => {
+  const page = `<html>
+      <head>
+        <title>Programing Jokes</title>
+        <style>
+        body {
+          padding: 10vh 10vw;
+          background-color: #fff;
+          color: black;
+          text-align: center;
+        }
+
+        a {
+          color: #000;
+        }
+
+        
+        </style>
+      </head>
+      <body>
+        <h1>Are you a magical creature yourself, click one of the links below to hear more magical creatures jokes!</h1>
+        <h2>Which magical creature are you?</h1>
+        <h2>How old are you?</h1>
+        <h2>What is your gender?</h1>
+
+        <h3><form><button formaction="/25/female">Mermaid</button></h3>
+        <h3><form><button formaction="/35/female">Phoenix</button></h3>
+        <h3><form><button formaction="/25/male">Cyclop</button></h3>
+        <h3><form><button formaction="/35/male">Gollum</button></h3>
+        <h3><form><button formaction="/25/female">Unicorn</button></h3>
+
+        <br>
+        <img src="https://cdn.shopify.com/s/files/1/0295/1977/3833/files/Unicorn-Gif_49.gif?v=1581528018" alt="Unicorn">
+        <img src="https://cdn.shopify.com/s/files/1/0295/1977/3833/files/Unicorn-Gif_49.gif?v=1581528018" alt="Unicorn">
+      </body>
+
+    </html>`;
+  response.send(page);
+});
+
+//Other page
 app.get("/:age/:gender", (request, response) => {
   const { age, gender } = request.params;
 
@@ -109,10 +151,10 @@ function displayJokes(joke) {
 
 function selectJokeForAgeAndGender(age, gender, jokes) {
   if (gender === "female") {
-    return age < 30 ? jokes.unicorn_joke : jokes.mermaid_joke;
+    return age < 30 ? jokes.mermaid_joke : jokes.phoenix_joke;
   } else if (gender === "male") {
     return age > 30 ? jokes.gollum_joke : jokes.cyclop_joke;
   } else {
-    return jokes.phoenix_joke;
+    return jokes.unicorn_joke;
   }
 }
