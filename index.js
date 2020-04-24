@@ -1,3 +1,26 @@
+const joke = {
+  joke_1: {
+    setup: "What do you call a boommeran that doesn't work?",
+    punchline: "A stick",
+  },
+  joke_2: {
+    setup: "The same bike tries to run me down every day.",
+    punchline: "Sounds like a vicious cycle",
+  },
+  joke_3: {
+    setup: "What do you call a guy who's had too much to drink?",
+    punchline: "A cab",
+  },
+  joke_4: {
+    setup: "What kinds of tree has a hand?",
+    punchline: "A palm tree",
+  },
+  joke_5: {
+    setup: "How does the solor system organize a party?",
+    punchline: "They planet!",
+  },
+};
+
 const express = require("express");
 
 const app = express();
@@ -8,14 +31,7 @@ app.listen(port, () => {
   console.log(`Listening on: ${port}`);
 });
 
-const joke = {
-  joke_1: "What do you call a boommeran that doesn't work? A stick",
-  joke_2:
-    "The same bike tries to run me down every day. Sounds like a vicious cycle",
-  joke_3: "What do you call a guy who's had too much to drink? A cab",
-  joke_4: "What kinds of tree has a hand? A palm tree",
-  joke_5: "How does the solor system organize a party? They planet!",
-};
+app.get("/jokes/:name/:age/:pinapplePizza", otherPagesURL);
 
 //Main page of the joke app
 const mainPageDesign = `<html>
@@ -44,7 +60,7 @@ const otherPagesURL = (request, response) => {
   //Pinapple on age, pizza or not
   console.log("Request...");
   if (age <= 30 && pinapplePizza === "yes") {
-    response.send(jokeOnePageDesign);
+    response.send(page);
   } else if (age <= 30 && pinapplePizza === "no") {
     response.send(jokeTwoPageDesign);
   } else if (age > 30 && pinapplePizza === "yes") {
@@ -52,16 +68,23 @@ const otherPagesURL = (request, response) => {
   } else if (age > 30 && pinapplePizza === "no") {
     response.send(jokeFourPageDesign);
   }
+
+  const page = render(joke);
 };
 
-const jokeOnePageDesign = `<html>
+function render(joke) {
+  const jokeOnePageDesign = `<html>
     <head>
       <title>Hello you with age</title>
     </head>
     <body>
       <h1>${joke.joke_1}</h1>
+      <img src="${img}"/>
     </body>
   </html>`;
+
+  return jokeOnePageDesign;
+}
 
 const jokeTwoPageDesign = `<html>
 <head>
@@ -89,5 +112,3 @@ const jokeFourPageDesign = `<html>
   <h1>${joke.joke_4}</h1>
 </body>
 </html>`;
-
-app.get("/jokes/:name/:age/:pinapplePizza", otherPagesURL);
