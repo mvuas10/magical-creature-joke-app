@@ -2,23 +2,36 @@ const jokes = {
   unicorn_joke: {
     setup: "Whats the difference between an honest politician and a unicorn?",
     punchline: "Nothing, they're both fictional characters.",
+    img1:
+      "https://www.indiewire.com/wp-content/uploads/2017/04/screen-shot-2017-04-08-at-12-15-05-pm.png?resize=800,482",
+    img2:
+      "https://www.funnymemes.net/wp-content/uploads/2013/10/Politics-Memes---with-this-technology.jpeg",
   },
   gollum_joke: {
     setup: "Why was Gollum executed at a bar in Iraq?",
     punchline: "Because he asked for Ice-es",
+    img1: "https://i.kym-cdn.com/photos/images/original/001/778/280/cca.jpg",
+    img2: "https://i.imgflip.com/1vd1z3.jpg",
   },
   cyclop_joke: {
     setup: "What did the cyclops sailor say to his captain?",
     punchline: "Eye captain",
+    img1: "http://cdn.funnyisms.com/be3d088a-ac74-4e8f-8e48-06c587a3b33c.jpg",
+    img2: "https://i.imgflip.com/36ql4m.jpg",
   },
   mermaid_joke: {
     setup: "Where did the fisherman and mermaid meet?",
     punchline: "On line!",
+    img1: "https://i.imgflip.com/39dwr4.jpg",
+    img2:
+      "https://i.chzbgr.com/full/8455249664/h69CDF191/the-grumpiest-mermaid",
   },
   phoenix_joke: {
     setup:
       "What award did Joaquin Phoenix win for his weight loss transformation into Arthur Fleck in Joker?",
     punchline: "Atrophy",
+    img1: "https://i.kym-cdn.com/photos/images/original/001/615/315/f94.jpg",
+    img2: "https://i.imgflip.com/3pewhf.jpg",
   },
 };
 
@@ -47,15 +60,22 @@ app.get("/:age/:gender", (request, response) => {
     joke = jokes.phoenix_joke;
   }
 
+  const page = render(joke);
+  response.send(page);
+});
+
+function render(joke) {
+  const { setup, punchline, img1, img2 } = joke;
   const page = `<html>
   <head>
     <title>Programing jokes</title>
   </head>
   <body>
-    <h1>${joke.setup}</h1>
-    <h1>${joke.punchline}</h1>
+    <h1>${setup}</h1>
+    <h1>${punchline}</h1>
+    <img src="${img1}"/>
+    <img src="${img2}"/>
   </body>
 </html>`;
-
-  response.send(page);
-});
+  return page;
+}
