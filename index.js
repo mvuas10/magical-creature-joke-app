@@ -90,7 +90,7 @@ app.get("/", (request, response) => {
         <button formaction="/35/female">Phoenix</button>
         <button formaction="/25/male">Cyclop</button>
         <button formaction="/35/male">Gollum</button>
-        <button formaction="/25/female">Unicorn</button>
+        <button formaction="/25/LGBT">Unicorn</button>
         </div>
         </form>
 
@@ -168,7 +168,7 @@ function selectJokeForAgeAndGender(age, gender, jokes) {
     return age < 30 ? jokes.mermaid_joke : jokes.phoenix_joke;
   } else if (gender === "male") {
     return age > 30 ? jokes.gollum_joke : jokes.cyclop_joke;
-  } else {
+  } else if (age < 30 && gender === "LGBT") {
     return jokes.unicorn_joke;
   }
 }
